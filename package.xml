@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<package>
+  <name>bin_picking_region_grow</name>
+  <version>1.0.0</version>
+  <description>Processing node for simple heap application </description>
+  <maintainer email="durovsky987@gmail.com">durovsky</maintainer>
+  <license>BSD</license>
+  <url type="website">http://www.smartroboticsys.eu/?p=1267</url>
+
+  <buildtool_depend>catkin</buildtool_depend>
+  <buildtool_depend>pcl</buildtool_depend>
+  
+  <build_depend>roscpp</build_depend>
+  <build_depend>tf</build_depend>
+  <build_depend>pcl_ros</build_depend>
+  <build_depend>message_generation</build_depend>
+  <build_depend>cmake_modules</build_depend>
+    
+  <run_depend>roscpp</run_depend>
+  <run_depend>tf</run_depend>
+  <run_depend>pcl_ros</run_depend>
+  <run_depend>message_generation</run_depend>
+  <run_depend>cmake_modules</run_depend>
+
+ 
+</package>
