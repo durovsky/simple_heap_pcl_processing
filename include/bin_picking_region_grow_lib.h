@@ -95,9 +95,7 @@ private:
    sensor_msgs::PointCloud2 topic_cloud;	//Pointcloud variable
    bool first_point_cloud_recieved;		    //Pointcloud message flag
    float nx,ny,nz;                          //Normal vector
-
-   pcl::PointCloud <pcl::PointXYZRGB>::Ptr colored_cloud   //Colored cloud
-
+   
    //Variables for launch file arguments
    std::string world_frame;
    std::string camera_frame;
