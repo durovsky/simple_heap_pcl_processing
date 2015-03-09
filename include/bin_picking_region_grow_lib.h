@@ -75,7 +75,7 @@ class PCL_recognizer
 {
 public:
 
-   PCL_recognizer(ros::NodeHandle nh);
+   PCL_recognizer(ros::NodeHandle *nh);
    ~PCL_recognizer();
    void cloud_Callback(const sensor_msgs::PointCloud2::ConstPtr &data);
    bool object_pose_Callback(bin_picking_region_grow::bin_picking_region_grow_service::Request &req,

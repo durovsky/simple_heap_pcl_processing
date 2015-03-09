@@ -42,33 +42,33 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 typedef pcl::PointXYZ PointT;
 typedef pcl::PointCloud<PointT> PointCloudT;
 
-PCL_recognizer::PCL_recognizer(ros::NodeHandle nh) :
+PCL_recognizer::PCL_recognizer(ros::NodeHandle *nh) :
   first_point_cloud_recieved(false)
   {
-     nh.getParam("world_frame", world_frame);
-     nh.getParam("camera_frame", camera_frame);
-     nh.getParam("voxel_leaf_size", voxel_leaf_size);
-     nh.getParam("x_filter_min", x_filter_min);
-     nh.getParam("x_filter_max", x_filter_max);
-     nh.getParam("y_filter_min", y_filter_min);
-     nh.getParam("y_filter_max", y_filter_max);
-     nh.getParam("z_filter_min", z_filter_min);
-     nh.getParam("z_filter_max", z_filter_max);
-     nh.getParam("plane_max_iterations", plane_max_iter);
-     nh.getParam("plane_distance_threshold", plane_dist_thresh);
-     nh.getParam("min_cluster_size", min_cluster_size);
-     nh.getParam("max_cluster_size", max_cluster_size);
-     nh.getParam("smoothness_threshold", smoothness_threshold);
-     nh.getParam("curvature_threshold", curvature_threshold);
+     nh->getParam("world_frame", world_frame);
+     nh->getParam("camera_frame", camera_frame);
+     nh->getParam("voxel_leaf_size", voxel_leaf_size);
+     nh->getParam("x_filter_min", x_filter_min);
+     nh->getParam("x_filter_max", x_filter_max);
+     nh->getParam("y_filter_min", y_filter_min);
+     nh->getParam("y_filter_max", y_filter_max);
+     nh->getParam("z_filter_min", z_filter_min);
+     nh->getParam("z_filter_max", z_filter_max);
+     nh->getParam("plane_max_iterations", plane_max_iter);
+     nh->getParam("plane_distance_threshold", plane_dist_thresh);
+     nh->getParam("min_cluster_size", min_cluster_size);
+     nh->getParam("max_cluster_size", max_cluster_size);
+     nh->getParam("smoothness_threshold", smoothness_threshold);
+     nh->getParam("curvature_threshold", curvature_threshold);
        
-     cloud_pub = nh.advertise<sensor_msgs::PointCloud2>("object_cluster",1);
-     marker_pub = nh.advertise<visualization_msgs::Marker>("visualization_marker",1);
+     cloud_pub = nh->advertise<sensor_msgs::PointCloud2>("object_cluster",1);
+     marker_pub = nh->advertise<visualization_msgs::Marker>("visualization_marker",1);
 
   }
 
 PCL_recognizer::~PCL_recognizer()
   {
-     delete this;
+     // delete
   }
   
 void
@@ -105,6 +105,8 @@ PCL_recognizer::visualize_cloud_normals(pcl::PointCloud<pcl::PointXYZ>::Ptr clou
        viewer->spinOnce(100);
        boost::this_thread::sleep(boost::posix_time::microseconds(100000));
     }
+    //Clean up
+    delete &viewer;
 }
 
 
@@ -398,7 +400,8 @@ PCL_recognizer::object_pose_Callback(bin_picking_region_grow::bin_picking_region
           marker_pub.publish(marker);
 
           currentClusterNum++;
-       }
+
+        }
        
        //-----------------------------------------------------------------------
        //Responding pose and normal of object with highest "z" coordinate
@@ -446,6 +449,8 @@ PCL_recognizer::object_pose_Callback(bin_picking_region_grow::bin_picking_region
      }      
   }
    
+
+
   return(true);
 }
 

@@ -42,7 +42,7 @@ main(int argc, char *argv[])
   ros::init(argc, argv, "bin_picking_region_grow");
   ros::NodeHandle nh;
 
-  PCL_recognizer recognizer(nh);
+  PCL_recognizer recognizer(&nh);
 
   ros::ServiceServer service = nh.advertiseService("object_pose", &PCL_recognizer::object_pose_Callback, &recognizer);
   ros::Subscriber cloud_sub = nh.subscribe("/camera/depth_registered/points", 1, &PCL_recognizer::cloud_Callback, &recognizer);
